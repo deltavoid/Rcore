@@ -87,7 +87,8 @@ export CC=$(cc)
 
 .PHONY: all clean run build asm doc justrun debug kernel sfsimg install
 
-all: kernel
+#all: kernel
+all : run
 
 clean:
 	@cargo clean
