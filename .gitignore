@@ -15,3 +15,6 @@ kernel/kernel.iml
 rcore_plus/
 tools/llc
 virt.out
+
+
+.idea

@@ -65,6 +65,11 @@ impl Processor {
         }
     }
 
+    /// ProcessManager functions used
+    ///     manager.run(inner.id);
+    ///     manager.stop(pid, context);
+    ///     manager().tick(self.pid());
+
     /// Called by process running on this Processor.
     /// Yield and reschedule.
     pub fn yield_now(&self) {
@@ -75,6 +80,18 @@ impl Processor {
             interrupt::restore(flags);
         }
     }
+
+    pub fn tick(&self) {
+        let flags = unsafe { interrupt::disable_and_store() };
+        let need_reschedule = self.manager().tick(self.pid());
+        unsafe { interrupt::restore(flags); }
+
+        if need_reschedule {
+            self.yield_now();
+        }
+    }
+
+
 
     pub fn pid(&self) -> Pid {
         self.inner().proc.as_ref().unwrap().0
@@ -88,13 +105,5 @@ impl Processor {
         &*self.inner().manager
     }
 
-    pub fn tick(&self) {
-        let flags = unsafe { interrupt::disable_and_store() };
-        let need_reschedule = self.manager().tick(self.pid());
-        unsafe { interrupt::restore(flags); }
 
-        if need_reschedule {
-            self.yield_now();
-        }
-    }
 }

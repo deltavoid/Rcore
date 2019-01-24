@@ -28,6 +28,8 @@ pub fn init() {
     for i in 0..cores {
         manager.add(Process::new_kernel(idle, i), 0);
     }
+
+
     crate::shell::run_user_shell();
 
     processor().manager().add(Process::new_kernel(crate::sync::test::philosopher_using_mutex, 0), 0);
@@ -77,8 +79,11 @@ pub mod context {
     // TODO: avoid pub
     pub struct Process {
         pub arch: ArchContext,
-        pub memory_set: MemorySet,
+
         pub kstack: KernelStack,
+        
+
+        pub memory_set: MemorySet,
         pub files: BTreeMap<usize, Arc<Mutex<File>>>,
         pub cwd: String,
     }

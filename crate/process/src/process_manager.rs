@@ -97,6 +97,18 @@ impl ProcessManager {
         self.scheduler.lock().set_priority(pid, priority);
     }
 
+    /// scheduler functions used
+    ///     scheduler.tick(pid)
+    ///     scheduler.select()
+    ///     scheduler.remove(pid);
+    ///     scheduler.insert(pid),
+
+
+    ///  泛型引用
+    ///  引用原则： 被引用对象的生命周期一定大于引用的生命周期
+    ///     Box<Object>
+    ///     Mutex<Object>
+
     /// Called by Processor to get a process to run.
     /// The manager first mark it `Running`,
     /// then take out and return its Context.

@@ -9,6 +9,7 @@ pub trait Scheduler {
     fn remove(&mut self, pid: Pid);
     fn select(&mut self) -> Option<Pid>;
     fn tick(&mut self, current: Pid) -> bool;   // need reschedule?
+
     fn set_priority(&mut self, pid: Pid, priority: u8);
     fn move_to_head(&mut self, pid: Pid);
 }

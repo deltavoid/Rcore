@@ -24,9 +24,9 @@ pub extern fn rust_main(hartid: usize, dtb: usize, hart_mask: usize, functions: 
     println!("Hello RISCV! in hart {}, dtb @ {:#x}, functions @ {:#x}", hartid, dtb, functions);
 
     crate::logging::init();
-    interrupt::init();
-    memory::init();
-    timer::init();
+        interrupt::init();
+        memory::init();
+        timer::init();
     crate::process::init();
 
     unsafe { cpu::start_others(hart_mask); }
