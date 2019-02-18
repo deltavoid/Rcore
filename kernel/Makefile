@@ -21,7 +21,8 @@
 #         | raspi3              Only available on aarch64, run on Raspberry Pi 3 Model B/B+
 #   m_mode                      Only available on riscv32, build for M-Mode, without MMU
 
-arch ?= riscv32
+#arch ?= riscv32
+arch ?= x86_64
 board ?= none
 mode ?= debug
 LOG  ?= debug
@@ -157,7 +158,8 @@ export CC=$(cc)
 
 .PHONY: all clean run build asm doc justrun debug kernel sfsimg install
 
-all: kernel
+#all: kernel
+all : run
 
 clean:
 	@cargo clean

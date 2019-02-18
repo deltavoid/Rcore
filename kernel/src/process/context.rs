@@ -9,11 +9,16 @@ use xmas_elf::{ElfFile, header, program::{Flags, Type}};
 use crate::arch::interrupt::{Context as ArchContext, TrapFrame};
 use crate::memory::{ByFrame, GlobalFrameAlloc, KernelStack, MemoryAttr, MemorySet};
 
+
+
+
+
 // TODO: avoid pub
 pub struct Process {
     pub arch: ArchContext,
     pub memory_set: MemorySet,
     pub kstack: KernelStack,
+
     pub files: BTreeMap<usize, Arc<Mutex<File>>>,
     pub cwd: String,
 }

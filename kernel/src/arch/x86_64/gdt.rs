@@ -52,6 +52,10 @@ pub fn init() {
         Mutex::new(Cpu { gdt, tss: unsafe { &mut *tss } }));
 }
 
+
+
+
+
 static CPUS: [Once<Mutex<Cpu>>; MAX_CPU_NUM] = [
     // TODO: More elegant ?
     Once::new(), Once::new(), Once::new(), Once::new(),
@@ -77,6 +81,9 @@ impl Cpu {
     }
 }
 
+
+
+
 pub const DOUBLE_FAULT_IST_INDEX: usize = 0;
 
 // Copied from xv6 x86_64
@@ -85,13 +92,13 @@ const UCODE: Descriptor = Descriptor::UserSegment(0x0020F80000000000);  // EXECU
 const KDATA: Descriptor = Descriptor::UserSegment(0x0000920000000000);  // DATA_WRITABLE | USER_SEGMENT | PRESENT
 const UDATA: Descriptor = Descriptor::UserSegment(0x0000F20000000000);  // DATA_WRITABLE | USER_SEGMENT | USER_MODE | PRESENT
 // Copied from xv6
-const UCODE32: Descriptor = Descriptor::UserSegment(0x00cffa00_0000ffff);
-// EXECUTABLE | USER_SEGMENT | USER_MODE | PRESENT
+const UCODE32: Descriptor = Descriptor::UserSegment(0x00cffa00_0000ffff);// EXECUTABLE | USER_SEGMENT | USER_MODE | PRESENT
 const UDATA32: Descriptor = Descriptor::UserSegment(0x00cff200_0000ffff);  // EXECUTABLE | USER_SEGMENT | USER_MODE | PRESENT
 
+
+pub const KDATA_SELECTOR: SegmentSelector = SegmentSelector::new(0, PrivilegeLevel::Ring0);
 pub const KCODE_SELECTOR: SegmentSelector = SegmentSelector::new(1, PrivilegeLevel::Ring0);
 pub const UCODE_SELECTOR: SegmentSelector = SegmentSelector::new(2, PrivilegeLevel::Ring3);
-pub const KDATA_SELECTOR: SegmentSelector = SegmentSelector::new(0, PrivilegeLevel::Ring0);
 pub const UDATA_SELECTOR: SegmentSelector = SegmentSelector::new(3, PrivilegeLevel::Ring3);
 pub const UCODE32_SELECTOR: SegmentSelector = SegmentSelector::new(4, PrivilegeLevel::Ring3);
 pub const UDATA32_SELECTOR: SegmentSelector = SegmentSelector::new(5, PrivilegeLevel::Ring3);

@@ -1,0 +1,211 @@
+Building kernel
+Building bootloader v0.3.4
+Creating disk image at target/x86_64/bootimage.bin
+Hello world! from CPU 1!
+Hello world! from CPU 2!
+Hello world! from CPU 3!
+Hello world! from CPU 0!
+init at CPU 0!
+[0;34m[ INFO] Hello world!
+[0m[0;34m[ INFO] BootInfo {
+    p4_table_addr: 18446744073709547520,
+    memory_map: [
+        MemoryRegion {
+            range: FrameRange(0x0..0x1000),
+            region_type: FrameZero
+        },
+        MemoryRegion {
+            range: FrameRange(0x1000..0x5000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0x5000..0x17000),
+            region_type: Bootloader
+        },
+        MemoryRegion {
+            range: FrameRange(0x17000..0x9f000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0x9f000..0xa0000),
+            region_type: Reserved
+        },
+        MemoryRegion {
+            range: FrameRange(0xf0000..0x100000),
+            region_type: Reserved
+        },
+        MemoryRegion {
+            range: FrameRange(0x100000..0x400000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0x400000..0xda5000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0xda5000..0xdac000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0xdac000..0xdca000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0xdca000..0xdcb000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0xdcb000..0xfcb000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0xfcb000..0xfcc000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0xfcc000..0x11cc000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0x11cc000..0x11cd000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0x11cd000..0x122c000),
+            region_type: Kernel
+        },
+        MemoryRegion {
+            range: FrameRange(0x122c000..0x122d000),
+            region_type: KernelStack
+        },
+        MemoryRegion {
+            range: FrameRange(0x122d000..0x1230000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0x1230000..0x142f000),
+            region_type: KernelStack
+        },
+        MemoryRegion {
+            range: FrameRange(0x142f000..0x1430000),
+            region_type: BootInfo
+        },
+        MemoryRegion {
+            range: FrameRange(0x1430000..0x1435000),
+            region_type: PageTable
+        },
+        MemoryRegion {
+            range: FrameRange(0x1435000..0x7fe0000),
+            region_type: Usable
+        },
+        MemoryRegion {
+            range: FrameRange(0x7fe0000..0x8000000),
+            region_type: Reserved
+        },
+        MemoryRegion {
+            range: FrameRange(0xfffc0000..0x100000000),
+            region_type: Reserved
+        }
+    ],
+    package: Package {
+        ptr: 0x0000000000012da9,
+        len: 0
+    }
+}
+[0m[0;34m[ INFO] heap init end
+[0m[0;34m[ INFO] memory: init end
+[0m[0;34m[ INFO] pic: disabled
+[0mGoing to user mode shell.
+Use 'ls' to list available programs.
+[0;34m[ INFO] process init end
+[0mfinish init at CPU 0
+other CPU start
+other CPU start
+other CPU start
+[0;34m[ INFO] open: path: "stdin:", flags: READABLE
+[0m[0;34m[ INFO] open: path: "stdout:", flags: WRITABLE
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mu[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0ms[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0me[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mr[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m [0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0ms[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mh[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m [0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mi[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0ms[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m [0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mr[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mu[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mn[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mn[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mi[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mn[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0mg[0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m![0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m![0;34m[ INFO] write: fd: 1, base: 0xb00ffe8c, len: 0x1
+[0m![0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m[0;34m[ INFO] COME into fork!
+[0m[0;34m[ INFO] finish mmset clone in fork!
+[0m[0;34m[ INFO] temporary copy data!
+[0m[0;34m[ INFO] fork: 4 -> 5
+[0m[0;34m[ INFO] wait: 4 -> 5, sleep
+[0m[0;34m[ INFO] exit: 5, code: 0
+[0m[0;34m[ INFO] PageTable dropping: InactivePageTable0 { p4_frame: PhysFrame[4KiB](0x7eba000) }
+[0m[0;34m[ INFO] wait: 4 -> 5
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m[0;34m[ INFO] COME into fork!
+[0m[0;34m[ INFO] finish mmset clone in fork!
+[0m[0;34m[ INFO] temporary copy data!
+[0m[0;34m[ INFO] fork: 4 -> 5
+[0m[0;34m[ INFO] wait: 4 -> 5, sleep
+[0m[0;34m[ INFO] exit: 5, code: 0
+[0m[0;34m[ INFO] PageTable dropping: InactivePageTable0 { p4_frame: PhysFrame[4KiB](0x7eba000) }
+[0m[0;34m[ INFO] wait: 4 -> 5
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m[0;34m[ INFO] COME into fork!
+[0m[0;34m[ INFO] finish mmset clone in fork!
+[0m[0;34m[ INFO] temporary copy data!
+[0m[0;34m[ INFO] fork: 4 -> 5
+[0m[0;34m[ INFO] wait: 4 -> 5, sleep
+[0m[0;34m[ INFO] exit: 5, code: 0
+[0m[0;34m[ INFO] PageTable dropping: InactivePageTable0 { p4_frame: PhysFrame[4KiB](0x7eba000) }
+[0m[0;34m[ INFO] wait: 4 -> 5
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m[0;34m[ INFO] COME into fork!
+[0m[0;34m[ INFO] finish mmset clone in fork!
+[0m[0;34m[ INFO] temporary copy data!
+[0m[0;34m[ INFO] fork: 4 -> 5
+[0m[0;34m[ INFO] wait: 4 -> 5, sleep
+[0m[0;34m[ INFO] exit: 5, code: 0
+[0m[0;34m[ INFO] PageTable dropping: InactivePageTable0 { p4_frame: PhysFrame[4KiB](0x7eba000) }
+[0m[0;34m[ INFO] wait: 4 -> 5
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m[0;34m[ INFO] COME into fork!
+[0m[0;34m[ INFO] finish mmset clone in fork!
+[0m[0;34m[ INFO] temporary copy data!
+[0m[0;34m[ INFO] fork: 4 -> 5
+[0m[0;34m[ INFO] wait: 4 -> 5, sleep
+[0m[0;34m[ INFO] exit: 5, code: 0
+[0m[0;34m[ INFO] PageTable dropping: InactivePageTable0 { p4_frame: PhysFrame[4KiB](0x7eba000) }
+[0m[0;34m[ INFO] wait: 4 -> 5
+[0m[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m$[0;34m[ INFO] write: fd: 1, base: 0xb00ffe5c, len: 0x1
+[0m [0;34m[ INFO] read: fd: 0, base: 0xb00fff37, len: 0x1
+[0m

@@ -19,11 +19,15 @@ static AP_CAN_INIT: AtomicBool = ATOMIC_BOOL_INIT;
 pub extern "C" fn _start(boot_info: &'static BootInfo) -> ! {
     let cpu_id = cpu::id();
     println!("Hello world! from CPU {}!", cpu_id);
+    //println!("the entry");
 
     if cpu_id != 0 {
         while !AP_CAN_INIT.load(Ordering::Relaxed) {}
+        println!("other CPU start");
         other_start();
     }
+
+    println!("init at CPU {}!", cpu_id);
 
     // First init log mod, so that we can print log info.
     crate::logging::init();
@@ -31,20 +35,21 @@ pub extern "C" fn _start(boot_info: &'static BootInfo) -> ! {
     info!("{:#?}", boot_info);
 
     // Init trap handling.
-    idt::init();
+        idt::init();
 
     // Init physical memory management and heap.
     memory::init(boot_info);
 
     // Now heap is available
-    gdt::init();
+        gdt::init();
 
-    cpu::init();
+        cpu::init();
 
     driver::init();
 
     crate::process::init();
 
+    println!("finish init at CPU 0");
     AP_CAN_INIT.store(true, Ordering::Relaxed);
 
     crate::kmain();

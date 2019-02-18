@@ -47,10 +47,14 @@ pub fn kmain() -> ! {
     processor().run();
 }
 
+
+
+
 /// Global heap allocator
 ///
 /// Available after `memory::init()`.
 ///
 /// It should be defined in memory mod, but in Rust `global_allocator` must be in root mod.
+// Global HEAP_AllOCATOR
 #[global_allocator]
 static HEAP_ALLOCATOR: LockedHeap = LockedHeap::empty();

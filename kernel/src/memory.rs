@@ -11,11 +11,17 @@ use lazy_static::*;
 use log::*;
 use linked_list_allocator::LockedHeap;
 
+
+
+
 #[cfg(not(feature = "no_mmu"))]
 pub type MemorySet = rcore_memory::memory_set::MemorySet<InactivePageTable0>;
 
 #[cfg(feature = "no_mmu")]
 pub type MemorySet = rcore_memory::no_mmu::MemorySet<NoMMUSupportImpl>;
+
+
+
 
 // x86_64 support up to 256M memory
 #[cfg(target_arch = "x86_64")]
@@ -29,19 +35,10 @@ pub type FrameAlloc = bit_allocator::BitAlloc4K;
 #[cfg(target_arch = "aarch64")]
 pub type FrameAlloc = bit_allocator::BitAlloc1M;
 
+
+// Global: FRAME_AllOCATOR
 lazy_static! {
     pub static ref FRAME_ALLOCATOR: SpinNoIrqLock<FrameAlloc> = SpinNoIrqLock::new(FrameAlloc::default());
-}
-
-lazy_static! {
-    static ref ACTIVE_TABLE: SpinNoIrqLock<CowExt<ActivePageTable>> = SpinNoIrqLock::new(unsafe {
-        CowExt::new(ActivePageTable::new())
-    });
-}
-
-/// The only way to get active page table
-pub fn active_table() -> MutexGuard<'static, CowExt<ActivePageTable>, SpinNoIrq> {
-    ACTIVE_TABLE.lock()
 }
 
 
@@ -69,6 +66,20 @@ pub fn dealloc_frame(target: usize) {
     GlobalFrameAlloc.dealloc(target);
 }
 
+
+
+
+// Global: HEAP
+pub fn init_heap() {
+    use crate::consts::KERNEL_HEAP_SIZE;
+    static mut HEAP: [u8; KERNEL_HEAP_SIZE] = [0; KERNEL_HEAP_SIZE];
+    unsafe { HEAP_ALLOCATOR.lock().init(HEAP.as_ptr() as usize, KERNEL_HEAP_SIZE); }
+    info!("heap init end");
+}
+
+
+
+
 pub struct KernelStack(usize);
 const STACK_SIZE: usize = 0x8000;
 
@@ -91,6 +102,22 @@ impl Drop for KernelStack {
 }
 
 
+
+
+// Global: ACTIVE_TABLE
+lazy_static! {
+    static ref ACTIVE_TABLE: SpinNoIrqLock<CowExt<ActivePageTable>> = SpinNoIrqLock::new(unsafe {
+        CowExt::new(ActivePageTable::new())
+    });
+}
+
+/// The only way to get active page table
+pub fn active_table() -> MutexGuard<'static, CowExt<ActivePageTable>, SpinNoIrq> {
+    ACTIVE_TABLE.lock()
+}
+
+
+
 /// Handle page fault at `addr`.
 /// Return true to continue, false to halt.
 #[cfg(not(feature = "no_mmu"))]
@@ -99,12 +126,8 @@ pub fn page_fault_handler(addr: usize) -> bool {
     process().memory_set.page_fault_handler(addr)
 }
 
-pub fn init_heap() {
-    use crate::consts::KERNEL_HEAP_SIZE;
-    static mut HEAP: [u8; KERNEL_HEAP_SIZE] = [0; KERNEL_HEAP_SIZE];
-    unsafe { HEAP_ALLOCATOR.lock().init(HEAP.as_ptr() as usize, KERNEL_HEAP_SIZE); }
-    info!("heap init end");
-}
+
+
 
 /// Allocator for the rest memory space on NO-MMU case.
 pub static MEMORY_ALLOCATOR: LockedHeap = LockedHeap::empty();
