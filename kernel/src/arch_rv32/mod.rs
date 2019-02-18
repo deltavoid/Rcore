@@ -8,6 +8,8 @@ pub mod cpu;
 mod sbi;
 mod riscv;
 
+use super::drivers;
+
 /// rcore初始化总控函数
 #[no_mangle]
 pub extern fn rust_main(hartid: usize, dtb: usize, hart_mask: usize, functions: usize) -> ! {
@@ -24,10 +26,11 @@ pub extern fn rust_main(hartid: usize, dtb: usize, hart_mask: usize, functions: 
     println!("Hello RISCV! in hart {}, dtb @ {:#x}, functions @ {:#x}", hartid, dtb, functions);
 
     crate::logging::init();
-        interrupt::init();
-        memory::init();
-        timer::init();
+    interrupt::init();
+    memory::init(dtb);
+    timer::init();
     crate::process::init();
+    drivers::init(dtb);
 
     unsafe { cpu::start_others(hart_mask); }
     crate::kmain();
